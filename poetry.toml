@@ -1,0 +1,7 @@
+[virtualenvs]
+in-project = true
+
+[repositories]
+
+[repositories.testpypi]
+url = "https://test.pypi.org/legacy/"
