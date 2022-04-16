@@ -6,7 +6,7 @@ from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine, QmlElement
 from PySide6.QtQuickControls2 import QQuickStyle
 
-from utils import create_markdown, export_markdown
+from rainbowdrinkinggame.utils import create_markdown, export_markdown
 # import style_rc
 
 # To be used on the @QmlElement decorator
@@ -29,8 +29,6 @@ class Bridge(QObject):
 
     @Slot(list, list, list)
     def create_result(self, players, sips, shots):
-        if len(players) != len(sips) != len(shots):
-            assert "Error in view.qml!"
         player_values = {"players": players, "sips": sips, "shots": shots}
         markdown_str = create_markdown(player_values)
         html_path = Path(__file__).parent.parent / "output.html"
@@ -38,16 +36,16 @@ class Bridge(QObject):
 
 
 if __name__ == "__main__":
-    app = QGuiApplication(sys.argv)
-    QQuickStyle.setStyle("Material")
-    engine = QQmlApplicationEngine()
+    app = QGuiApplication(sys.argv) #pragma: no cover
+    QQuickStyle.setStyle("Material") #pragma: no cover
+    engine = QQmlApplicationEngine() #pragma: no cover
 
     # Get the path of the current directory, and then add the name
     # of the QML file, to load it.
-    qml_file = Path(__file__).parent / "view.qml"
-    engine.load(qml_file)
+    qml_file = Path(__file__).parent / "view.qml" #pragma: no cover
+    engine.load(qml_file) #pragma: no cover
 
-    if not engine.rootObjects():
-        sys.exit(-1)
+    if not engine.rootObjects(): #pragma: no cover
+        sys.exit(-1) #pragma: no cover
 
-    sys.exit(app.exec())
+    sys.exit(app.exec()) #pragma: no cover
