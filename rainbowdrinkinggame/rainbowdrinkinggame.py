@@ -1,3 +1,23 @@
+# -*- coding: utf-8 -*-
+""" Rainbow Drinking Game Main Module
+
+This module creates a pyside6 Window Application for the 
+"Rainbow Drinking Game". It helps to document the player activitate 
+for the game and exports the statistics at the end of the game as html file.
+
+Example:
+    To run the Application just go into the root directory and call:
+
+        $ python rainbowdrinkinggame/rainbowdrinkinggame.py
+
+Todo:
+    * Fix cov pragmas
+    * add style_rc
+
+.. _Google Python Style Guide:
+   http://google.github.io/styleguide/pyguide.html
+"""
+
 import sys
 from pathlib import Path
 
@@ -7,7 +27,7 @@ from PySide6.QtQml import QQmlApplicationEngine, QmlElement
 from PySide6.QtQuickControls2 import QQuickStyle
 
 from rainbowdrinkinggame.utils import create_markdown, export_markdown
-# import style_rc
+#import style_rc
 
 # To be used on the @QmlElement decorator
 # (QML_IMPORT_MINOR_VERSION is optional)
@@ -17,18 +37,44 @@ QML_IMPORT_MAJOR_VERSION = 1
 
 @QmlElement
 class Bridge(QObject):
+    """Pyside6 Bridge Object for Signals/Slots in the QML"""
     @Slot(str, result=str)
     def plus(self, value):
+        """The plus method adds 1 to the str input and returns the result as str.
+
+        Args:
+            value (str): A numeric uint8 string value
+
+        Returns:
+            str: The Sum of value and 1
+        """
         return str(int(value) + 1)
 
     @Slot(str, result=str)
     def minus(self, value):
+        """The minus method substracts 1 from the str input and returns the result as str.
+
+        Args:
+            value (str): A numeric uint8 string value
+
+        Returns:
+            str: The Substraction of value by 1, or "0" if value is already "0".
+        """
         if int(value) == 0:
             return str(0)
         return str(int(value) - 1)
 
     @Slot(list, list, list)
     def create_result(self, players, sips, shots):
+        """the create_result method uses the given data to export the html statistics.
+        This Method self accepts more than 5 Players but will fail in the lower called 
+        util functions.
+
+        Args:
+            players (List(str)): A List with 5 Player names
+            sips (List(int)): A List with 5 sip statistics
+            shots (List(int)): A List with 5 shot statistics
+        """
         player_values = {"players": players, "sips": sips, "shots": shots}
         markdown_str = create_markdown(player_values)
         html_path = Path(__file__).parent.parent / "output.html"

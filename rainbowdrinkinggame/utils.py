@@ -6,7 +6,10 @@ The functions are mainly used inside slots methods, but can also be used outside
 the methods.
 
 Todo:
-    - All Fine for the moment.
+    * All Fine for the moment.
+
+.. _Google Python Style Guide:
+   http://google.github.io/styleguide/pyguide.html
 """
 from pathlib import Path
 from typing import Dict, Union, List
