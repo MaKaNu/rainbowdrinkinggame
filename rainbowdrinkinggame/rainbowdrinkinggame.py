@@ -79,8 +79,8 @@ class Bridge(QObject):
 
         Args:
             players (List(str)): A List with 5 Player names
-            sips (List(int)): A List with 5 sip statistics
-            shots (List(int)): A List with 5 shot statistics
+            sips (List(str)): A List with 5 sip statistics
+            shots (List(str)): A List with 5 shot statistics
         """
         logging.debug(
             "%s: slot method 'minus': players=%s, sips=%s, shots=%s",
