@@ -29,12 +29,22 @@ jobs:
           sudo apt install libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 libgl1-mesa-glx libegl1
           /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1920x1200x24 -ac +extension GLX
       - name: Install poetry
-        run: pip install poetry
+        uses: snok/install-poetry@v1.0.0
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        run: poetry update
+        run: poetry install
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        
       - name: Unit & Coverage test with pytest
         run: poetry run pytest
-      
       - name: Check style with pylint
         run: poetry run pylint rainbowdrinkinggame/ tests/
       - name: Check format with black
