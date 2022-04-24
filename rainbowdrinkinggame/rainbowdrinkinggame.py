@@ -41,7 +41,8 @@ QML_IMPORT_MAJOR_VERSION = 1
 class Bridge(QObject):
     """Pyside6 Bridge Object for Signals/Slots in the QML"""
 
-    @Slot(str, result=str)
+    #TODO result=str causes mypy issues
+    @Slot(str, result=str) # type: ignore
     def plus(self, value):
         """The plus method adds 1 to the str input and returns the result as str.
 
@@ -54,7 +55,8 @@ class Bridge(QObject):
         logging.debug("%s: slot method 'plus': value=%s", self.__str__, value)
         return str(int(value) + 1)
 
-    @Slot(str, result=str)
+    #TODO result=str causes mypy issues
+    @Slot(str, result=str) # type: ignore
     def minus(self, value):
         """The minus method substracts 1 from the str input and returns the result as str.
 
