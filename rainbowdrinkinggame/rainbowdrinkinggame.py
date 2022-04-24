@@ -11,7 +11,6 @@ Example:
         $ python rainbowdrinkinggame/rainbowdrinkinggame.py
 
 Todo:
-    * Fix cov pragmas
     * add style_rc
 
 .. _Google Python Style Guide:
