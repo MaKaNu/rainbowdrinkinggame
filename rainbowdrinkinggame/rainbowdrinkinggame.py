@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """ Rainbow Drinking Game Main Module
 
-This module creates a pyside6 Window Application for the 
-"Rainbow Drinking Game". It helps to document the player activitate 
+This module creates a pyside6 Window Application for the
+"Rainbow Drinking Game". It helps to document the player activitate
 for the game and exports the statistics at the end of the game as html file.
 
 Example:
@@ -20,6 +20,7 @@ Todo:
 
 import sys
 from pathlib import Path
+import logging
 
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
@@ -48,6 +49,7 @@ class Bridge(QObject):
         Returns:
             str: The Sum of value and 1
         """
+        logging.debug("%s: slot method 'plus': value=%s", self.__str__, value)
         return str(int(value) + 1)
 
     @Slot(str, result=str)
@@ -60,6 +62,7 @@ class Bridge(QObject):
         Returns:
             str: The Substraction of value by 1, or "0" if value is already "0".
         """
+        logging.debug("%s: slot method 'minus': value=%s", self.__str__, value)
         if int(value) == 0:
             return str(0)
         return str(int(value) - 1)
@@ -67,7 +70,7 @@ class Bridge(QObject):
     @Slot(list, list, list)
     def create_result(self, players, sips, shots):
         """the create_result method uses the given data to export the html statistics.
-        This Method self accepts more than 5 Players but will fail in the lower called 
+        This Method self accepts more than 5 Players but will fail in the lower called
         util functions.
 
         Args:
@@ -75,6 +78,8 @@ class Bridge(QObject):
             sips (List(int)): A List with 5 sip statistics
             shots (List(int)): A List with 5 shot statistics
         """
+        logging.debug("%s: slot method 'minus': players=%s, sips=%s, shots=%s",
+            self.__str__, players, sips, shots)
         player_values = {"players": players, "sips": sips, "shots": shots}
         markdown_str = create_markdown(player_values)
         html_path = Path(__file__).parent.parent / "output.html"
