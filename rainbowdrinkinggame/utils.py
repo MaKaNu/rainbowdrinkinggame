@@ -12,12 +12,12 @@ Todo:
    http://google.github.io/styleguide/pyguide.html
 """
 from pathlib import Path
-from typing import Dict, Union, List
+from typing import Dict, List
 
 from markdown import markdown
 
 
-def create_markdown(player_values: Dict[str, Union[List[str], List[int]]]) -> str:
+def create_markdown(player_values: Dict[str, List[str]]) -> str:
     """This Function creates a multiline string based on a dictinary
 
     The dictionary has to follow some strict rules,

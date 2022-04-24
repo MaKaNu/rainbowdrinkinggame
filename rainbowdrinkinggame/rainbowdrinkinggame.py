@@ -21,6 +21,7 @@ Todo:
 import sys
 from pathlib import Path
 import logging
+from typing import List
 
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
@@ -43,7 +44,7 @@ class Bridge(QObject):
 
     # TODO result=str causes mypy issues
     @Slot(str, result=str)  # type: ignore
-    def plus(self, value):
+    def plus(self, value: str) -> str:
         """The plus method adds 1 to the str input and returns the result as str.
 
         Args:
@@ -57,7 +58,7 @@ class Bridge(QObject):
 
     # TODO result=str causes mypy issues
     @Slot(str, result=str)  # type: ignore
-    def minus(self, value):
+    def minus(self, value: str) -> str:
         """The minus method substracts 1 from the str input and returns the result as str.
 
         Args:
@@ -72,7 +73,7 @@ class Bridge(QObject):
         return str(int(value) - 1)
 
     @Slot(list, list, list)
-    def create_result(self, players, sips, shots):
+    def create_result(self, players: List[str], sips: List[str], shots: List[str]) -> None:
         """the create_result method uses the given data to export the html statistics.
         This Method self accepts more than 5 Players but will fail in the lower called
         util functions.
