@@ -1,51 +1,52 @@
-from rainbowdrinkinggame.utils import create_markdown, export_markdown
+"""Pytest: utils modules"""
+from pathlib import Path
 
 import pytest
-from pathlib import Path
-#import pyfakefs
-import html5lib
+
+from rainbowdrinkinggame.utils import create_markdown, export_markdown
+
 
 def test_create_markdown_generel():
-    input = {
+    input_dict = {
         'players': ['P1', 'P2', 'P3', 'P4', 'P5'],
         'sips': [1,2,3,4,5],
         'shots': [5,4,3,2,1]
         }
-    output = create_markdown(input)
+    output = create_markdown(input_dict)
     assert isinstance(output, str)
 
 def test_create_markdown_less_players():
-    input = {
+    input_dict = {
         'players': ['P1', 'P2', 'P3', 'P4'],
         'sips': [1,2,3,4,5],
         'shots': [5,4,3,2,1]
         }
     with pytest.raises(AssertionError) as excinfo:
-        create_markdown(input)
+        create_markdown(input_dict)
     assert "Player Count needs to be 5" in str(excinfo.value)
 
 def test_create_markdown_less_sips():
-    input = {
+    input_dict = {
         'players': ['P1', 'P2', 'P3', 'P4', 'P5'],
         'sips': [1,2,3,4],
         'shots': [5,4,3,2,1]
         }
     with pytest.raises(AssertionError) as excinfo:
-        create_markdown(input)
+        create_markdown(input_dict)
     assert "Sips count needs to be equal player count" in str(excinfo.value)
 
 def test_create_markdown_less_shots():
-    input = {
+    input_dict = {
         'players': ['P1', 'P2', 'P3', 'P4', 'P5'],
         'sips': [1,2,3,4,5],
         'shots': [5,4,3,2]
         }
     with pytest.raises(AssertionError) as excinfo:
-        create_markdown(input)
+        create_markdown(input_dict)
     assert "Shots count needs to be equal player count" in str(excinfo.value)
 
 def test_export_markdown_generel(fs):
-    input = """
+    input_str = """
 # Header1
 
 - item1
@@ -53,9 +54,12 @@ def test_export_markdown_generel(fs):
 
 test text
     """
-    dir = Path('/test/test.html')
-    fs.create_file(dir)
-    output = export_markdown(input, dir)
-    assert dir.exists()
-    html5parser = html5lib.HTMLParser()
-    html5parser.parse(output)
+    directory = Path('/test/test.html')
+    fs.create_file(directory)
+    assert directory.exists()
+    with open(directory, 'r', encoding="utf8") as file:
+        assert len(file.readlines()) == 0
+    export_markdown(input_str, directory)
+    with open(directory, 'r', encoding="utf8") as file:
+        assert len(file.readlines()) > 0
+        

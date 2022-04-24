@@ -1,6 +1,4 @@
 """Test module for rainbowdrinkinggame."""
-import pytest
-
 
 from rainbowdrinkinggame import (
     __author__,
@@ -19,7 +17,7 @@ def test_project_info():
     assert __author__ == "Matti Kaupenjohann"
     assert __email__ == "matti.kaupenjohann@fh-dortmund.de"
     assert __version__ == "0.0.0"
-    
+
 def test_qml_globals():
     """Test QML Specific Global Variables
     """
@@ -39,7 +37,7 @@ def test_bridge_minus():
     assert output == "1"
     assert output_zero == "0"
     assert isinstance(output, str)
-    
+
 def test_bridge_create_result(mocker):
     mocker.patch(
         'rainbowdrinkinggame.utils.create_markdown',
