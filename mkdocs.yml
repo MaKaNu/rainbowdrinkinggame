@@ -10,7 +10,7 @@ repo_url: https://github.com/makanu/rainbowdrinkinggame
 edit_uri: ""
 
 # Copyright
-copyright: Copyright &copy; 2020 Matti Kaupenjohann
+copyright: Copyright &copy; 2022 Matti Kaupenjohann
 
 # Configuration
 theme:
@@ -31,4 +31,10 @@ extra:
 
 # Page tree
 nav:
-  - Home: index.md
+  - Home: 
+    -Introduction: index.md
+  - Rules:
+    - Basic Rules: rules/basic.md
+  - Packages:
+    - rainbowdrinkinggame: packages/rainbowdrinkinggame.md
+    - tests: packages/tests.md
