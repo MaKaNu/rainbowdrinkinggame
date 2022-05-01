@@ -34,7 +34,7 @@ nav:
   - Home: 
     - Introduction: index.md
   - Rules:
-    - Basic Rules: rules/basic.md
+    - Basic: rules/basic.md
   - Packages:
     - rainbowdrinkinggame: packages/rainbowdrinkinggame.md
     - tests: packages/tests.md
