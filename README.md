@@ -12,7 +12,7 @@
 A small pyqt app for a drinking game. You need Rainbowsix Siege to play accurate ;).
 
 
-- Free software: GPL-3.0-only
+- Free software: GPLv3
 - Documentation: https://makanu.github.io/rainbowdrinkinggame.
 
 
